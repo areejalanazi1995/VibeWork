@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Footer - VibeWork</title>
+
+  <style>
+    :root {
+      --burgundy: #7B1E3A;
+      --sage: #6B8F71;
+      --cream: #F7F4EF;
+      --beige: #EAD9C0;
+      --gold: #D4AF37;
+      --dark: #2F2F2F;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Tahoma", "Arial", sans-serif;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .footer {
+      background: #2F2F2F;
+      color: white;
+      padding: 50px 7% 20px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 35px;
+    }
+
+    .footer h3 {
+      color: var(--beige);
+      margin-bottom: 16px;
+    }
+
+    .footer p,
+    .footer a {
+      color: #ddd;
+      line-height: 1.9;
+      font-size: 14px;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .footer a:hover {
+      color: var(--gold);
+    }
+
+    .footer-logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .socials span {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .socials span:hover {
+      background: var(--burgundy);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 18px;
+      text-align: center;
+      color: #bbb;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <div class="footer-logo">VibeWork</div>
+        <p>
+          منصة مخصصة للمشرفين والموظفين تساعد على تنظيم العمل،
+          رفع الإنتاجية، وتحفيز الفريق بطريقة مهنية ولطيفة.
+        </p>
+
+        <div class="socials">
+          <span>𝕏</span>
+          <span>in</span>
+          <span>▶</span>
+          <span>✉</span>
+        </div>
+      </div>
+
+      <div>
+        <h3>روابط سريعة</h3>
+        <a href="#home">الرئيسية</a>
+        <a href="#features">المميزات</a>
+        <a href="#supervisor">للمشرف</a>
+        <a href="#employee">للموظف</a>
+      </div>
+
+      <div>
+        <h3>الخدمات</h3>
+        <a href="#">إدارة المهام</a>
+        <a href="#">تقارير الأداء</a>
+        <a href="#">المكافآت</a>
+        <a href="#">لوحة المنافسة</a>
+      </div>
+
+      <div>
+        <h3>تواصل</h3>
+        <p>البريد: info@vibework.com</p>
+        <p>الموقع: المملكة العربية السعودية</p>
+        <p>الدعم: متاح خلال أيام العمل</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      جميع الحقوق محفوظة © 2026 VibeWork
+    </div>
+  </footer>
+</body>
+</html>

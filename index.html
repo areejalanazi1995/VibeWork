@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VibeWork</title>
+
+  <style>
+    :root {
+      --burgundy: #7B1E3A;
+      --sage: #6B8F71;
+      --cream: #F7F4EF;
+      --beige: #EAD9C0;
+      --gold: #D4AF37;
+      --dark: #2F2F2F;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Tahoma", "Arial", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--dark);
+    }
+
+    #header, #footer {
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      padding: 90px 7%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+      overflow: hidden;
+      isolation: isolate;
+      background: #111;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -3;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(247,244,239,0.96) 0%, rgba(247,244,239,0.82) 43%, rgba(123,30,58,0.50) 100%),
+        radial-gradient(circle at top right, rgba(212,175,55,0.30), transparent 35%);
+      z-index: -2;
+    }
+
+    .hero-glass {
+      position: absolute;
+      inset: 28px 4%;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 42px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(2px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.72);
+      color: var(--burgundy);
+      border: 1px solid rgba(123,30,58,0.12);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+    }
+
+    .hero-content h1 {
+      font-size: 50px;
+      line-height: 1.35;
+      margin: 0 0 18px;
+      color: var(--burgundy);
+      text-shadow: 0 2px 18px rgba(255,255,255,0.35);
+    }
+
+    .hero-content p {
+      font-size: 19px;
+      line-height: 2;
+      color: #444;
+      margin-bottom: 28px;
+      max-width: 680px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary, .btn-secondary {
+      border: none;
+      padding: 14px 28px;
+      border-radius: 35px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--burgundy);
+      color: white;
+      box-shadow: 0 10px 25px rgba(123, 30, 58, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.85);
+      color: var(--sage);
+      border: 1px solid rgba(107,143,113,0.25);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-primary:hover, .btn-secondary:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(14px);
+      padding: 26px;
+      border-radius: 34px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.14);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.45);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: rgba(107,143,113,0.15);
+      border-radius: 50%;
+      top: -60px;
+      left: -50px;
+    }
+
+    .dashboard-box {
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .avatar {
+      width: 62px;
+      height: 62px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--sage), var(--burgundy));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 26px;
+    }
+
+    .progress-card {
+      background: var(--cream);
+      padding: 18px;
+      border-radius: 24px;
+      margin-bottom: 14px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: #e2ded6;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-fill {
+      width: 78%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--sage), var(--gold));
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mini-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 20px;
+      padding: 16px;
+      text-align: center;
+      font-weight: bold;
+      color: var(--burgundy);
+    }
+
+    section {
+      padding: 70px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 34px;
+      color: var(--burgundy);
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #666;
+      font-size: 17px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 26px;
+      border-radius: 28px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.05);
+      transition: 0.3s;
+      border: 1px solid rgba(123,30,58,0.08);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: rgba(107,143,113,0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      color: var(--sage);
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: #666;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .roles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    .role-card {
+      background: white;
+      padding: 34px;
+      border-radius: 34px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.06);
+    }
+
+    .role-card h3 {
+      color: var(--burgundy);
+      font-size: 26px;
+      margin-top: 0;
+    }
+
+    .role-card ul {
+      padding-right: 18px;
+      line-height: 2.2;
+      color: #555;
+    }
+
+    .leaderboard {
+      background: linear-gradient(135deg, var(--sage), #8EA98F);
+      color: white;
+      border-radius: 36px;
+      padding: 46px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .rank-list {
+      background: rgba(255,255,255,0.16);
+      padding: 20px;
+      border-radius: 26px;
+    }
+
+    .rank-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .rank-item:last-child {
+      border-bottom: none;
+    }
+
+    .contact {
+      text-align: center;
+      background: #fff;
+      border-radius: 36px;
+      margin: 50px 7%;
+      padding: 50px 20px;
+    }
+
+    .contact h2 {
+      color: var(--burgundy);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .leaderboard,
+      .roles {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-content h1 {
+        font-size: 36px;
+      }
+
+      .hero {
+        padding: 70px 6%;
+      }
+
+      .hero-overlay {
+        background: rgba(247,244,239,0.88);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content h1 {
+        font-size: 31px;
+      }
+
+      .hero-content p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="header"></div>
+
+  <main>
+    <section class="hero" id="home">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="media/md.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+      </video>
+
+      <div class="hero-overlay"></div>
+      <div class="hero-glass"></div>
+
+      <div class="hero-content">
+        <div class="hero-badge">✨ منصة إدارة وتحفيز للفِرق</div>
+
+        <h1>منصة تحفّز فريقك وتطوّر أداءهم كل يوم</h1>
+        <p>
+          VibeWork منصة مخصصة للمشرف والموظفين، تجمع بين إدارة المهام،
+          متابعة الأداء، التحفيز، والمنافسة المهنية اللطيفة داخل بيئة عمل ممتعة.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn-primary">ابدأ تجربة المشرف</button>
+          <button class="btn-secondary">استعرض فكرة التطبيق</button>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="dashboard-box">
+          <div class="profile">
+            <div class="avatar">م</div>
+            <div>
+              <h3 style="margin:0;color:#7B1E3A;">مرحباً يا مشرفة الفريق</h3>
+              <p style="margin:6px 0;color:#777;">نظرة سريعة على أداء اليوم</p>
+            </div>
+          </div>
+
+          <div class="progress-card">
+            <strong>نسبة إنجاز الفريق</strong>
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+            <small>78% من مهام اليوم مكتملة</small>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini-card">12<br><small>موظف</small></div>
+            <div class="mini-card">152<br><small>مهمة</small></div>
+            <div class="mini-card">10<br><small>نشط</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="section-title">
+        <h2>مميزات التطبيق</h2>
+        <p>إدارة ذكية بروح مرحة وتحفيزية</p>
+      </div>
+
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>إدارة المهام</h3>
+          <p>إسناد المهام للموظفين ومتابعة حالة الإنجاز بشكل يومي.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3>منافسة لطيفة</h3>
+          <p>ترتيب أسبوعي ونقاط تحفيزية بدون ضغط سلبي على الفريق.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>تقارير الأداء</h3>
+          <p>لوحات واضحة تساعد المشرف على فهم وضع الفريق بسرعة.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎁</div>
+          <h3>مكافآت وشارات</h3>
+          <p>تحفيز الموظفين برسائل شكر، شارات، وكوبونات بسيطة.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="roles">
+        <div class="role-card" id="supervisor">
+          <h3>لوحة المشرف</h3>
+          <ul>
+            <li>متابعة أداء الفريق اليومي.</li>
+            <li>إضافة وتوزيع المهام.</li>
+            <li>مراقبة المتأخرين والمنجزين.</li>
+            <li>إرسال مكافآت وشارات تحفيزية.</li>
+            <li>استخراج تقارير أسبوعية وشهرية.</li>
+          </ul>
+        </div>
+
+        <div class="role-card" id="employee">
+          <h3>لوحة الموظف</h3>
+          <ul>
+            <li>عرض المهام اليومية.</li>
+            <li>تتبع المستوى والنقاط.</li>
+            <li>مشاهدة الإنجازات والشارات.</li>
+            <li>المشاركة في التحديات الأسبوعية.</li>
+            <li>تسجيل المزاج اليومي للتطوير والدعم.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="leaderboard">
+        <div>
+          <h2 style="font-size:34px;margin-top:0;">لوحة المنافسة الأسبوعية</h2>
+          <p style="line-height:2;">
+            منافسة مهنية خفيفة تجعل الموظف يشعر بالحماس والإنجاز،
+            والمشرف يقدر يلاحظ الأداء بطريقة إيجابية وسهلة.
+          </p>
+        </div>
+
+        <div class="rank-list">
+          <div class="rank-item"><span>🥇 عمر</span><strong>1250 XP</strong></div>
+          <div class="rank-item"><span>🥈 ماريا</span><strong>1100 XP</strong></div>
+          <div class="rank-item"><span>🥉 سارة</span><strong>980 XP</strong></div>
+          <div class="rank-item"><span>⭐ خالد</span><strong>870 XP</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2>VibeWork</h2>
+      <p>نظام إداري وتحفيزي يجعل بيئة العمل أكثر تفاعلًا وإنجازًا.</p>
+      <button class="btn-primary">تواصل معنا</button>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+<script>
+
+  async function loadPart(id, file) {
+
+    try {
+
+      const response = await fetch(file);
+
+      if (!response.ok) {
+        throw new Error(`فشل تحميل ${file}`);
+      }
+
+      const html = await response.text();
+
+      document.getElementById(id).innerHTML = html;
+
+      if (id === "header") {
+
+        initializeHeader();
+
+      }
+
+    } catch (error) {
+
+      console.error("خطأ:", error);
+
+    }
+
+  }
+
+  function initializeHeader() {
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
+
+    if (menuBtn && navMenu) {
+
+      menuBtn.addEventListener("click", function () {
+
+        navMenu.classList.toggle("active");
+
+      });
+
+    }
+
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    loadPart("header", "header.html");
+    loadPart("footer", "footer.html");
+
+  });
+
+</script>
+</body>
+</html>ٍ
